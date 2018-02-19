@@ -1,3 +1,8 @@
+function subscribe(ob) {
+  [10, 20, 30].forEach(ob.next)
+  ob.complete()
+}
+
 const observer = {
   next: function nextCallback(data) {
     console.log(data)
@@ -10,8 +15,4 @@ const observer = {
   }
 }
 
-function giveMeSomeData(ob) {
-  [10, 20, 30].forEach(ob.next)
-}
-
-giveMeSomeData(observer)
+subscribe(observer)
