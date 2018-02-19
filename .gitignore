@@ -1,0 +1,20 @@
+# Mac files
+.DS_Store
+
+# Logs
+*.log*
+
+# Dependency directory
+node_modules
+
+# VSCode metadata
+.vscode
+
+# dist folder
+/dist/
+
+# Jest coverage files
+/coverage/
+
+# babel transform ES6 to ES5
+/lib/
