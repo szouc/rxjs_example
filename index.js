@@ -1,19 +1,7 @@
-import Rx from 'rxjs'
+import { interval } from 'rxjs/observable/interval'
+import { map, mergeAll } from 'rxjs/operators'
 
-var observable = Rx.Observable.create(function(observer) {
-  observer.next(1)
-  observer.next(2)
-  observer.next(3)
-  setTimeout(() => {
-    observer.next(4)
-    observer.complete()
-  }, 1000)
-})
-
-console.log('just before subscribe')
-observable.subscribe({
-  next: x => console.log('got value ' + x),
-  error: err => console.error('something wrong occurred: ' + err),
-  complete: () => console.log('done')
-})
-console.log('just after subscribe')
+var clicks = interval(5000)
+var higherOrder = clicks.pipe(map(ev => interval(1000)))
+var switched = higherOrder.pipe(mergeAll())
+switched.subscribe(x => console.log(x))
