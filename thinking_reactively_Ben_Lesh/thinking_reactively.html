@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>thinking_reactively</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///C:\Users\szouc\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.2\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="%E5%93%8D%E5%BA%94%E5%BC%8F%E6%80%9D%E7%BB%B4-thinking-reactively-ben-lesh">响应式思维 (Thinking Reactively) | Ben Lesh</h1>
+
+<ul>
+<li><a href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%80%9D%E7%BB%B4-thinking-reactively-ben-lesh">响应式思维 (Thinking Reactively) | Ben Lesh</a>
+<ul>
+<li><a href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A-drag-drop">实例： Drag &amp; Drop</a>
+<ul>
+<li><a href="#%E5%86%85%E5%AE%B9">内容</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BA%86%E8%A7%A3%E5%93%8D%E5%BA%94%E5%BC%8F%E6%80%9D%E7%BB%B4">进一步了解响应式思维</a>
+<ul>
+<li><a href="#%E6%B5%81%E5%8F%98%E9%87%8F%E5%92%8C%E9%9D%9E%E6%B5%81%E5%8F%98%E9%87%8F-%E8%87%AA%E5%B7%B1%E8%87%86%E6%83%B3%E7%9A%84%EF%BC%8C%E6%85%8E%E7%9C%8B">流变量和非流变量 (自己臆想的，慎看)</a></li>
+<li><a href="#%E6%B2%A1%E6%9C%89%E4%BA%86%E6%93%8D%E4%BD%9C%E7%AC%A6%EF%BC%8Cobservable-%E5%B0%B1%E6%98%AF-%E3%80%82%E3%80%82%E3%80%82">没有了操作符，Observable 就是 。。。</a></li>
+</ul>
+</li>
+<li><a href="#%E9%87%8D%E7%82%B9%EF%BC%9A%E8%A7%A3%E5%AF%86-observable">重点：解密 Observable</a>
+<ul>
+<li><a href="#observable-%E5%86%85%E9%83%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F">Observable 内部是什么？</a></li>
+<li><a href="#observable-%E4%BB%85%E4%BB%85%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">Observable 仅仅是一个函数</a></li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B9%9F%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">操作符也是一个函数</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%BE%E7%A4%BA">图示</a>
+<ul>
+<li><a href="#%E6%AD%A3%E5%B8%B8%E6%8E%A8%E9%80%81%E6%95%B0%E6%8D%AE">正常推送数据</a></li>
+<li><a href="#%E9%87%8D%E7%82%B9%EF%BC%9A%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">重点：异常处理</a></li>
+</ul>
+</li>
+<li><a href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%80%9D%E7%BB%B4%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">响应式思维的适用场景</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+<p>Ben Lesh 是 RxJS 库的领导者和布道者，提倡使用响应式思维来抽象逻辑和编写程序，现就职于 Google 。而本文则是对他的一篇研报的记录，<a href="https://www.youtube.com/watch?v=3LKMwkuK0ZE">该研报是在 AngularConnect 会议中汇报的</a>。研报首先从一个实例开始谈起：</p>
+<h2 class="mume-header" id="%E5%AE%9E%E4%BE%8B-drag-drop">实例： Drag &amp; Drop</h2>
+
+<h3 class="mume-header" id="%E5%86%85%E5%AE%B9">内容</h3>
+
+<p>每次 <strong>在目标上按下鼠标（mousedown）</strong> ，开始监听 <strong>页面上鼠标移动（mousemove）</strong> 直到 <strong>鼠标弹起（mouseup）</strong></p>
+<p>相关概念（基础函数）定义：</p>
+<pre class="language-js"><span class="token keyword">const</span> target <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelect</span><span class="token punctuation">(</span><span class="token string">'#target'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> targetMouseDown$ <span class="token operator">=</span> Observable<span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token string">'mousedown'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> docMouseMove$ <span class="token operator">=</span> Observable<span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token string">'mouseover'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> docMouseUp$ <span class="token operator">=</span> Observable<span class="token punctuation">.</span><span class="token function">fromEvent</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token string">'mouseup'</span><span class="token punctuation">)</span>
+</pre>
+<blockquote>
+<ol>
+<li>变量后 <code>$</code> 表示该变量是 Observable 。</li>
+<li>Observable 本质是一个函数，后面 Ben 会解释。</li>
+</ol>
+</blockquote>
+<h3 class="mume-header" id="%E5%88%86%E6%9E%90">分析</h3>
+
+<ol>
+<li>页面上鼠标移动（mousemove）直到鼠标弹起（mouseup） =&gt;</li>
+</ol>
+<pre class="language-js">docMouseMove$<span class="token punctuation">.</span><span class="token function">takeUntil</span><span class="token punctuation">(</span>docMouseUp$<span class="token punctuation">)</span>
+</pre>
+<blockquote>
+<p>操作符 <code>takeUntil</code> 使得 <code>docMouseMove$</code> 持续推送数据，直到 <code>docMouseUp$</code> 推送一个通知（数据）后停止。附上 <code>takeUntil</code> 弹珠图：</p>
+<p><img src="http://reactivex.io/rxjs/img/takeUntil.png" alt="takeUntil"></p>
+</blockquote>
+<ol start="2">
+<li>每次在目标上按下鼠标（mousedown），开始监听 =&gt;</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> dragDrop$ <span class="token operator">=</span> targetMouseDown$<span class="token punctuation">.</span><span class="token function">switchMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span>
+  docMouseMove$<span class="token punctuation">.</span><span class="token function">takeUntil</span><span class="token punctuation">(</span>docMouseUp$<span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</pre>
+<blockquote>
+<p>操作符 <code>switchMap</code> 将 <code>targetMouseDown$</code> 推送的值传入进内部函数（该例不传入推送值，推送仅仅作为通知使用），然后 <strong>切换</strong> 至 <code>docMouseMove$</code> 并压平输出（例中 <code>targtMouseDown$</code> 仅仅推送一次，内部函数仅执行一次，因此无须压平）。附上 <code>switchMap</code> 弹珠图：</p>
+<p><img src="http://reactivex.io/rxjs/img/switchMap.png" alt="switchMap"></p>
+</blockquote>
+<h3 class="mume-header" id="%E5%B0%8F%E7%BB%93">小结</h3>
+
+<p>解决问题的思路应该是从后向前推导，确认好每个事件流，根据问题组织事件流。</p>
+<h2 class="mume-header" id="%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BA%86%E8%A7%A3%E5%93%8D%E5%BA%94%E5%BC%8F%E6%80%9D%E7%BB%B4">进一步了解响应式思维</h2>
+
+<h3 class="mume-header" id="%E6%B5%81%E5%8F%98%E9%87%8F%E5%92%8C%E9%9D%9E%E6%B5%81%E5%8F%98%E9%87%8F-%E8%87%AA%E5%B7%B1%E8%87%86%E6%83%B3%E7%9A%84%E6%85%8E%E7%9C%8B">流变量和非流变量 (自己臆想的，慎看)</h3>
+
+<blockquote>
+<p>在系统中流变量都是 Observable。</p>
+</blockquote>
+<p>变量顾名思义是变化的，根据广义、狭义相对论可知，变化是针对参照物来说的（提高点 X 格），而非流变量的参照物是整个程序和时间轴。但是如果将参照物改为某一行代码，非流变量随时间是不变的，只是一个占位符。</p>
+<pre class="language-js"><span class="token keyword">var</span> c <span class="token operator">=</span> a <span class="token operator">+</span> b <span class="token comment" spellcheck="true">// 站在这里，发现 c 一直不变。</span>
+<span class="token function">doSometing</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 对非流变量的操作，仅调用一次</span>
+</pre>
+<p>流变量则是一种指向流（ stream ）的标识符。</p>
+<pre class="language-js"><span class="token keyword">var</span> c$ <span class="token operator">=</span> a$<span class="token punctuation">.</span><span class="token function">combineLatest</span><span class="token punctuation">(</span>b$<span class="token punctuation">,</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=></span> a <span class="token operator">+</span> b<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 站在这里感受下涓涓细流</span>
+c$<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>doSomething<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 对流变量的操作，回调多次</span>
+</pre>
+<blockquote>
+<p>操作符 <code>combineLatest</code> 对任一个 Observable 推送的值，都与其他 Observable 最后值融合。具体融合方法以函数形式给出。惯例附上 <code>combineLatest</code> 弹珠图：</p>
+<p><img src="http://reactivex.io/rxjs/img/combineLatest.png" alt="combineLatest"></p>
+</blockquote>
+<h3 class="mume-header" id="%E6%B2%A1%E6%9C%89%E4%BA%86%E6%93%8D%E4%BD%9C%E7%AC%A6observable-%E5%B0%B1%E6%98%AF">没有了操作符，Observable 就是 。。。</h3>
+
+<pre class="language-js"><span class="token comment" spellcheck="true">// 名字就是标识符，可以改成 asy.ok(...)</span>
+promise<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>successFn<span class="token punctuation">,</span> errorFn<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 名字就是标识符，可以改成 asy.ok(...)</span>
+observable<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>nextFn<span class="token punctuation">,</span> errorFn<span class="token punctuation">,</span> completeFn<span class="token punctuation">)</span>
+</pre>
+<p>大概 60+ 的操作符，请查看<a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html">官网</a></p>
+<h2 class="mume-header" id="%E9%87%8D%E7%82%B9%E8%A7%A3%E5%AF%86-observable">重点：解密 Observable</h2>
+
+<h3 class="mume-header" id="observable-%E5%86%85%E9%83%A8%E6%98%AF%E4%BB%80%E4%B9%88">Observable 内部是什么？</h3>
+
+<ul>
+<li>搅乱脑汁的复杂异步</li>
+<li>应用于航空科技的算法</li>
+<li>黑魔法</li>
+<li>独角兽</li>
+</ul>
+<p>以上是 Ben 总结的。</p>
+<h3 class="mume-header" id="observable-%E4%BB%85%E4%BB%85%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">Observable 仅仅是一个函数</h3>
+
+<ol>
+<li>Observable 有一个名为 observer 的参数：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> myObservable <span class="token operator">=</span> observer <span class="token operator">=></span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</pre>
+<ol start="2">
+<li>observer 对象会有几个方法：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> myObservable <span class="token operator">=</span> observer <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">const</span> id <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    observer<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// next 方法</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">===</span> <span class="token number">10</span><span class="token punctuation">)</span> observer<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// complete 方法</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre>
+<ol start="3">
+<li>Observable 会返回销毁逻辑：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> myObservable <span class="token operator">=</span> observer <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">const</span> id <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    observer<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// next 方法</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">===</span> <span class="token number">10</span><span class="token punctuation">)</span> observer<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// complete 方法</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">clearInterval</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 用于终止订阅</span>
+<span class="token punctuation">}</span>
+</pre>
+<ol start="4">
+<li>调用 Observable 函数的同时订阅了你的 observer</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> myObservable <span class="token operator">=</span> <span class="token punctuation">(</span>observer<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">const</span> id <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    observer<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// next 方法</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">===</span> <span class="token number">10</span><span class="token punctuation">)</span> observer<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// complete 方法</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">clearInterval</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 用于终止订阅</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 订阅你的 observer</span>
+<span class="token keyword">const</span> teardown <span class="token operator">=</span> <span class="token function">myObservable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token function">next</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span>'done<span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 1 秒后取消订阅</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">teardown</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+</pre>
+<h3 class="mume-header" id="%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B9%9F%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">操作符也是一个函数</h3>
+
+<p>操作符函数吃进一个 Observable 吐出一个 Observable :</p>
+<pre class="language-js"><span class="token keyword">const</span> operator <span class="token operator">=</span> InputObservable <span class="token operator">=></span> OutputObservable
+</pre>
+<ol>
+<li>将 OutputObservable 变量展开成函数形式：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> operator <span class="token operator">=</span> <span class="token punctuation">(</span>InputObservable<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>OutObserver<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+<ol start="2">
+<li>操作符是一个函数，她的参数是 Observable 并且输出也是 Observable ，也就是通过 InputObservable 构建 OutputObservable ：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> operator <span class="token operator">=</span> InputObservable <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> OutObserver <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">InputObservable</span><span class="token punctuation">(</span>InObserver<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+<ol start="3">
+<li>Observable 就是一个拥有 observer 参数的函数，而 observer 对象的形式是约定好的：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> observer <span class="token operator">=</span> <span class="token punctuation">{</span>
+  next<span class="token punctuation">:</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  error<span class="token punctuation">:</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  complete<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+<p>也可以短方法声明：</p>
+<pre class="language-js"><span class="token keyword">const</span> observer <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+<ol start="4">
+<li>构建 InObserver 和 OutObserver 之间的映射关系（操作符是 Observable 和 Observer 之间的操作，而此时还没有给出映射函数，所以 InObserver 和 OutObserver 其实现在还没有变化 ）：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> operator <span class="token operator">=</span> InputObservable <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> OutObserver <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">InputObservable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        OutObserver<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        OutObserver<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        OutObserver<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+<blockquote>
+<p>不难看出 <code>next(data) { OutObserver.next(data)}</code> 等同于 <code>next = OutObserver.next</code>, <code>error</code> 和 <code>complete</code> 类似，意味着此时 <code>InObserver</code> 等于 <code>OutObserver</code>。</p>
+</blockquote>
+<ol start="5">
+<li>最后添加操作推送数据的映射函数：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> operator <span class="token operator">=</span> <span class="token punctuation">(</span>InputObservable<span class="token punctuation">,</span> mapFn<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> OutObserver <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">InputObservable</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        OutObserver<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token function">mapFn</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        OutObserver<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        OutObserver<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+<p>单独分析 <code>next</code> 方法来观察 <code>InObserver</code> 和 <code>OutObserver</code> 的关系：</p>
+<pre class="language-js"><span class="token keyword">function</span> InObserver<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> newData <span class="token operator">=</span> <span class="token function">mapFn</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+  OutObserver<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>newData<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre>
+<ol start="6">
+<li>验证。现在把之前创建的 <code>myObservable</code> 和 <code>operator</code> 应用到程序中：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> source <span class="token operator">=</span> <span class="token function">operator</span><span class="token punctuation">(</span>myObservable<span class="token punctuation">,</span> x <span class="token operator">=></span> x <span class="token operator">+</span> <span class="token string">'!'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> teardown <span class="token operator">=</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    consol<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'done'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 4 秒后取消订阅</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">teardown</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">4000</span><span class="token punctuation">)</span>
+</pre>
+<p>输出的结果：</p>
+<pre class="language-bash">0<span class="token operator">!</span>
+1<span class="token operator">!</span>
+2<span class="token operator">!</span>
+<span class="token punctuation">..</span>.
+</pre>
+<blockquote>
+<p>这里的结果有问题，因为收到 <code>complete</code> 推送后，并没有取消订阅，因此上面代码设置了显式的取消订阅过程。Ben 在另外的研报中详细介绍了使用 safeObserver 解决上述问题。</p>
+</blockquote>
+<ol start="7">
+<li>酷，来几个串行操作。</li>
+</ol>
+<pre class="language-js"><span class="token keyword">const</span> source <span class="token operator">=</span> <span class="token function">operator</span><span class="token punctuation">(</span><span class="token function">operator</span><span class="token punctuation">(</span>myObservable<span class="token punctuation">,</span> x <span class="token operator">=></span> x <span class="token operator">+</span> <span class="token string">'!'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> x <span class="token operator">=></span> x <span class="token operator">+</span> <span class="token string">'?'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> teardown <span class="token operator">=</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    consol<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'done'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">// 4 秒后取消订阅</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">teardown</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">4000</span><span class="token punctuation">)</span>
+</pre>
+<p>太繁琐了，想想就头痛：</p>
+<pre class="language-js"><span class="token keyword">const</span> source <span class="token operator">=</span> <span class="token function">operator</span><span class="token punctuation">(</span><span class="token function">operator</span><span class="token punctuation">(</span><span class="token function">opserator</span><span class="token punctuation">(</span>observable<span class="token punctuation">,</span> mapFn<span class="token punctuation">)</span><span class="token punctuation">,</span> mapFn<span class="token punctuation">)</span><span class="token punctuation">,</span> mapFn<span class="token punctuation">)</span>
+</pre>
+<ol start="8">
+<li>把 Observable 函数用类来包裹（注意仅仅是把 Observable 函数打包进类里，并不是把 Observable 函数转化成类），操作符作为类的方法，这样便可以使用链式写法调用操作符了：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">class</span> <span class="token class-name">Observable</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>observableFn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>subscribe <span class="token operator">=</span> observableFn <span class="token comment" spellcheck="true">// 好记忆的标识 subscribe</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> myObservable <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Observable</span><span class="token punctuation">(</span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> teardown <span class="token operator">=</span> myObservable<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span> consol<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'done'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre>
+<ol start="9">
+<li>添加 map 操作符到类中：</li>
+</ol>
+<pre class="language-js"><span class="token keyword">class</span> <span class="token class-name">Observable</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>observableFn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>subscribe <span class="token operator">=</span> observableFn <span class="token comment" spellcheck="true">// 好记忆的标识 subscribe</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">map</span><span class="token punctuation">(</span>mapFn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Observable</span><span class="token punctuation">(</span>observer <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          observer<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token function">mapFn</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          observer<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          observer<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+<p>现在使用链式写操作符试试：</p>
+<pre class="language-js">myObservable
+  <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=></span> x <span class="token operator">+</span> <span class="token string">'!'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=></span> x <span class="token operator">+</span> <span class="token string">'?'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=></span> x <span class="token operator">+</span> <span class="token string">'.'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token function">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre>
+<h3 class="mume-header" id="%E5%B0%8F%E7%BB%93-1">小结</h3>
+
+<ul>
+<li>Observable 就是函数。</li>
+<li>因为函数仅在调用时执行，所以 Observable 是惰性的。</li>
+<li>操作符也是函数，输入是 Observable，输出也是 Observable 。</li>
+<li>链式操作就是连接每个操作的 observer 。</li>
+</ul>
+<h2 class="mume-header" id="%E5%9B%BE%E7%A4%BA">图示</h2>
+
+<h3 class="mume-header" id="%E6%AD%A3%E5%B8%B8%E6%8E%A8%E9%80%81%E6%95%B0%E6%8D%AE">正常推送数据</h3>
+
+<p>下面将 Observable 的运行过程可视化，先给出 Observable 的订阅实例：</p>
+<pre class="language-js">Observable<span class="token punctuation">.</span><span class="token function">interval</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// like setInterval</span>
+  <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>x <span class="token operator">=></span> x <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=></span> x <span class="token operator">+</span> x<span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>next<span class="token punctuation">,</span> error<span class="token punctuation">,</span> complete<span class="token punctuation">)</span>
+</pre>
+<ol>
+<li>开始是数据的产生者</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-68583433d15b9102.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="producer"></p>
+<ol start="2">
+<li>流程的最后是你的回调处理，也就是数据的消费者</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-74d4155e057a2db0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="consumer"></p>
+<ol start="3">
+<li>最初推送的是 0 ，每一步的图示：</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-771fba345674ce9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x63A8;&#x9001;&#x6570;&#x503C; 0 "></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-014ec574c566c24b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="filter"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-8b880b256dba019b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-b06d89a9fb1a9297.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="consumer"></p>
+<ol start="4">
+<li>然后是推送 1 ：</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-771fba345674ce9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x63A8;&#x9001;&#x6570;&#x503C; 1 "></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-ebb3a942c4ca53ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="filter"></p>
+<p>然后就没有然后了， 1 被 filter 过滤掉了。</p>
+<h3 class="mume-header" id="%E9%87%8D%E7%82%B9%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">重点：异常处理</h3>
+
+<p>异常处理过程可能会给我们带来一些疑惑，主要是因为以下几个事件影响：</p>
+<ul>
+<li><code>error()</code> 被调用</li>
+<li><code>complete()</code> 被调用</li>
+<li>取消订阅</li>
+</ul>
+<p>这些事件发生后， Observable 将不再推送数据。继续给出实例：</p>
+<pre class="language-js">Observable<span class="token punctuation">.</span><span class="token function">interval</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'haha'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> x
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>next<span class="token punctuation">,</span> error<span class="token punctuation">,</span> complete<span class="token punctuation">)</span>
+</pre>
+<ol>
+<li>
+<p>处理推送 0 的过程略过。</p>
+</li>
+<li>
+<p>生产者推送 1 是，抛出了异常：</p>
+</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-50b68b2b8ecb75f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map&#x8BA1;&#x7B97;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-37b6f4e7aeae6d6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5F97;&#x5230;&#x5F02;&#x5E38;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-7b64a082f3dd6d0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x53D6;&#x6D88;&#x8BA2;&#x9605;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-1f60a0ef2466496e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5904;&#x7406;&#x5F02;&#x5E38;"></p>
+<blockquote>
+<p>当抛出异常后，Observable 不会继续推送数据（取消订阅），而消费者将会使用 <code>error()</code> 处理异常。</p>
+<p>这个还有个问题，Ben 在<a href="https://medium.com/@benlesh/">他的专栏</a>里提到过，<a href="https://medium.com/@benlesh/on-the-subject-of-subjects-in-rxjs-2b08b7198b93">多播场景的错误捕获</a>。</p>
+</blockquote>
+<ol start="3">
+<li>当异常抛出后，Observable 就挂掉了，如果还想继续推送如何实现？答案是：创建 observer 分支。</li>
+</ol>
+<pre class="language-js">Observable<span class="token punctuation">.</span><span class="token function">interval</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">switchMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">.</span>http<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>err <span class="token operator">=></span> Observable<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>data <span class="token operator">=></span> <span class="token function">render</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre>
+<p>先来学习操作符 catch ，它会捕获和处理 Observable 推送的异常，并返回一个新的 Observable 或者继续抛出异常。附上弹珠图：</p>
+<p><img src="http://reactivex.io/rxjs/img/catch.png" alt="catch"></p>
+<p>图示具体流程：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-1546f62ae3d9a66d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x751F;&#x4EA7;&#x8005;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-50725209f2ad3f2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="switchMap"></p>
+<p>网络不好，查询过程超时。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-78c8247ca60bc9d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Ajax&#x8D85;&#x65F6;"></p>
+<p>取消 Ajax Observable 的订阅</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-a9a625d71fd212fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="catch"></p>
+<p>转化异常到新的 Observable</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-fc479d1c30020377.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x53D6;&#x6D88;&#x5206;&#x652F;&#x8BA2;&#x9605;"></p>
+<p>取消 <code>Observable.empty</code> 的订阅</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5518635-2724b4ec0bdafdf4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>小结：</p>
+<ul>
+<li>创建另外一个 observer 链</li>
+<li>使用 catch 增强这个链的鲁棒性</li>
+<li>守护了原始的 observer 链</li>
+</ul>
+<h2 class="mume-header" id="%E5%93%8D%E5%BA%94%E5%BC%8F%E6%80%9D%E7%BB%B4%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">响应式思维的适用场景</h2>
+
+<p>Ben 在研报的最后分析了响应式思维的使用场景，这里简单的将 PPT 页翻译，具体的实际应用还是需要在编程中发觉和选择的。</p>
+<ul>
+<li>将多个事件融合在一起</li>
+<li>添加延时</li>
+<li>客户端限制流量</li>
+<li>协调异步任务</li>
+<li>需要注销机制</li>
+</ul>
+<h2 class="mume-header" id="%E6%80%BB%E7%BB%93">总结</h2>
+
+<p>最后将该文的具体内容概述为以下 6 个方面。</p>
+<ul>
+<li>逆向思维</li>
+<li>任何的变量都可以被观察</li>
+<li>Observable 是函数</li>
+<li>Observer 链处理计算</li>
+<li>调用 <code>error()</code> 会终止 observer 链</li>
+<li>尽情使用 Rx 。</li>
+</ul>
+<p>本文是在我学习 RxJS 过程中为了加强记忆和便于理解而记录的，里面添加了大量的个人学习倾向，局限于个人知识面有限，难免有不当和错误之处，欢迎大家批评指导。</p>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%80%9D%E7%BB%B4-thinking-reactively-ben-lesh">响应式思维 (Thinking Reactively) | Ben Lesh</a>
+<ul>
+<li><a href="#%E5%AE%9E%E4%BE%8B-drag-drop">实例： Drag &amp; Drop</a>
+<ul>
+<li><a href="#%E5%86%85%E5%AE%B9">内容</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BA%86%E8%A7%A3%E5%93%8D%E5%BA%94%E5%BC%8F%E6%80%9D%E7%BB%B4">进一步了解响应式思维</a>
+<ul>
+<li><a href="#%E6%B5%81%E5%8F%98%E9%87%8F%E5%92%8C%E9%9D%9E%E6%B5%81%E5%8F%98%E9%87%8F-%E8%87%AA%E5%B7%B1%E8%87%86%E6%83%B3%E7%9A%84%E6%85%8E%E7%9C%8B">流变量和非流变量 (自己臆想的，慎看)</a></li>
+<li><a href="#%E6%B2%A1%E6%9C%89%E4%BA%86%E6%93%8D%E4%BD%9C%E7%AC%A6observable-%E5%B0%B1%E6%98%AF">没有了操作符，Observable 就是 。。。</a></li>
+</ul>
+</li>
+<li><a href="#%E9%87%8D%E7%82%B9%E8%A7%A3%E5%AF%86-observable">重点：解密 Observable</a>
+<ul>
+<li><a href="#observable-%E5%86%85%E9%83%A8%E6%98%AF%E4%BB%80%E4%B9%88">Observable 内部是什么？</a></li>
+<li><a href="#observable-%E4%BB%85%E4%BB%85%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">Observable 仅仅是一个函数</a></li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B9%9F%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">操作符也是一个函数</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93-1">小结</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%BE%E7%A4%BA">图示</a>
+<ul>
+<li><a href="#%E6%AD%A3%E5%B8%B8%E6%8E%A8%E9%80%81%E6%95%B0%E6%8D%AE">正常推送数据</a></li>
+<li><a href="#%E9%87%8D%E7%82%B9%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">重点：异常处理</a></li>
+</ul>
+</li>
+<li><a href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%80%9D%E7%BB%B4%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">响应式思维的适用场景</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    </body>
+    
+    
+    
+    
+    
+    <script>
+(function bindTaskListEvent() {
+  var taskListItemCheckboxes = document.body.getElementsByClassName('task-list-item-checkbox')
+  for (var i = 0; i < taskListItemCheckboxes.length; i++) {
+    var checkbox = taskListItemCheckboxes[i]
+    var li = checkbox.parentElement
+    if (li.tagName !== 'LI') li = li.parentElement
+    if (li.tagName === 'LI') {
+      li.classList.add('task-list-item')
+    }
+  }
+}())    
+</script>
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  </html>

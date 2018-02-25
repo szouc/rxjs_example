@@ -1,0 +1,41 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "globals": {
+    "__DEV__": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "classes": true,
+      "defaultParams": true
+    }
+  },
+  "settings": {
+    "polyfills": ["fetch"]
+  },
+  "extends": ["prettier", "standard"],
+  "plugins": ["prettier"],
+  "rules": {
+    "semi": ["error", "never"],
+    "no-unexpected-multiline": "error",
+    "no-const-assign": "warn",
+    "no-this-before-super": "warn",
+    "no-undef": "warn",
+    "no-unreachable": "warn",
+    "no-unused-vars": "warn",
+    "constructor-super": "warn",
+    "valid-typeof": "warn",
+    "space-before-function-paren": "off",
+    "no-useless-constructor": "off",
+    "handle-callback-err": "off"
+  }
+}

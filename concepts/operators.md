@@ -1,26 +1,26 @@
-# 1. OPERATORS
+# OPERATORS
 
 <!-- TOC -->
 
-- [1. OPERATORS](#1-operators)
-  - [1.1. Combination Operators](#11-combination-operators)
-    - [1.1.1. combineLatest](#111-combinelatest)
-    - [1.1.2. concat](#112-concat)
-    - [1.1.3. merge](#113-merge)
-    - [1.1.4. mergeAll](#114-mergeall)
-    - [1.1.5. switch](#115-switch)
-    - [1.1.6. startWith](#116-startwith)
-    - [1.1.7. withLatestFrom](#117-withlatestfrom)
-  - [1.2. Transformation Operators](#12-transformation-operators)
-    - [1.2.1. bufferTime](#121-buffertime)
-    - [1.2.2. concatMap](#122-concatmap)
-    - [1.2.3. map](#123-map)
-    - [1.2.4. mergeMap](#124-mergemap)
-    - [1.2.5. scan](#125-scan)
-    - [1.2.6. switchMap](#126-switchmap)
-  - [1.3. Filtering Operator](#13-filtering-operator)
-    - [1.3.1. debounceTime](#131-debouncetime)
-    - [1.3.2. distinctUntilChanged](#132-distinctuntilchanged)
+- [OPERATORS](#operators)
+  - [Combination Operators](#combination-operators)
+    - [combineLatest](#combinelatest)
+    - [concat](#concat)
+    - [merge](#merge)
+    - [mergeAll](#mergeall)
+    - [switch](#switch)
+    - [startWith](#startwith)
+    - [withLatestFrom](#withlatestfrom)
+  - [Transformation Operators](#transformation-operators)
+    - [bufferTime](#buffertime)
+    - [concatMap](#concatmap)
+    - [map](#map)
+    - [mergeMap](#mergemap)
+    - [scan](#scan)
+    - [switchMap](#switchmap)
+  - [Filtering Operator](#filtering-operator)
+    - [debounceTime](#debouncetime)
+    - [distinctUntilChanged](#distinctuntilchanged)
     - [filter](#filter)
     - [take](#take)
     - [takeUntil](#takeuntil)
@@ -33,9 +33,9 @@
 
 <!-- /TOC -->
 
-## 1.1. Combination Operators
+## Combination Operators
 
-### 1.1.1. combineLatest
+### combineLatest
 
 Combines multiple Observables to create an Observable whose values are calculated from the latest values of each of its input Observables.
 
@@ -47,7 +47,7 @@ public static combineLatest(observable1: ObservableInput, observable2: Observabl
 
 > Whenever any input Observable emits a value, it computes a formula using the latest values from all the inputs, then emits the output of that formula.
 
-### 1.1.2. concat
+### concat
 
 Creates an output Observable which **sequentially** emits all values from given Observable and then moves on to the next.
 
@@ -61,7 +61,7 @@ public static concat(input1: ObservableInput, input2: ObservableInput, scheduler
 >
 > **note:** sequentially emits.
 
-### 1.1.3. merge
+### merge
 
 Creates an output Observable which **concurrently** emits all values from every given input Observable.
 
@@ -75,7 +75,7 @@ public static merge(observables: ...ObservableInput, concurrent: number, schedul
 >
 > **note:** concurrently emits
 
-### 1.1.4. mergeAll
+### mergeAll
 
 Converts a higher-order Observable into a first-order Observable which concurrently delivers all values that are emitted on the inner Observables.
 
@@ -89,7 +89,7 @@ public mergeAll(concurrent: number): Observable
 >
 > **notes** `mergeAll` merge and flatten Observables from the higher-order Observable; `merge` merge values from the Observable
 
-### 1.1.5. switch
+### switch
 
 Converts a higher-order Observable into a first-order Observable by subscribing to only the most recently emitted of those inner Observables.
 
@@ -101,7 +101,7 @@ public switch(): Observable<T>
 
 > Flattens an Observable-of-Observables by dropping the previous inner Observable once a new one appears.
 
-### 1.1.6. startWith
+### startWith
 
 Returns an Observable that emits the items you specify as arguments before it begins to emit items emitted by the source Observable.
 
@@ -111,7 +111,7 @@ public startWith(values: ...T, scheduler: Scheduler): Observable
 
 ![startWith](http://reactivex.io/rxjs/img/startWith.png)
 
-### 1.1.7. withLatestFrom
+### withLatestFrom
 
 Combines the source Observable with other Observables to create an Observable whose values are calculated from the latest values of each, only when the source emits.
 
@@ -123,9 +123,9 @@ public withLatestFrom(other: ObservableInput, project: Function): Observable
 
 > Whenever the source Observable emits a value, it computes a formula using that value plus the latest values from other input Observables, then emits the output of that formula.
 
-## 1.2. Transformation Operators
+## Transformation Operators
 
-### 1.2.1. bufferTime
+### bufferTime
 
 Buffers the source Observable values for a specific time period.
 
@@ -137,7 +137,7 @@ public bufferTime(bufferTimeSpan: number, bufferCreationInterval: number, maxBuf
 
 > Collects values from the past as an array, and emits those arrays periodically in time.
 
-### 1.2.2. concatMap
+### concatMap
 
 Projects each source value to an Observable which is merged in the output Observable, in a serialized fashion waiting for each one to complete before merging the next.
 
@@ -149,7 +149,7 @@ public concatMap(project: function(value: T, ?index: number): ObservableInput, r
 
 > Maps each value to an Observable, then flattens all of these inner Observables using concatAll.
 
-### 1.2.3. map
+### map
 
 Applies a given project function to each value emitted by the source Observable, and emits the resulting values as an Observable.
 
@@ -161,7 +161,7 @@ public map(project: function(value: T, index: number): R, thisArg: any): Observa
 
 > Like `Array.prototype.map()`, it passes each source value through a transformation function to get corresponding output values.
 
-### 1.2.4. mergeMap
+### mergeMap
 
 Projects each source value to an Observable which is merged in the output Observable.
 
@@ -173,7 +173,7 @@ public mergeMap(project: function(value: T, ?index: number): ObservableInput, re
 
 > Maps each value to an Observable, then flattens all of these inner Observables using mergeAll.
 
-### 1.2.5. scan
+### scan
 
 Applies an accumulator function over the source Observable, and returns each intermediate result, with an optional seed value.
 
@@ -185,7 +185,7 @@ public scan(accumulator: function(acc: R, value: T, index: number): R, seed: T |
 
 > It's like `reduce`, but emits the current accumulation whenever the source emits a value.
 
-### 1.2.6. switchMap
+### switchMap
 
 Projects each source value to an Observable which is merged in the output Observable, emitting values only from the most recently projected Observable.
 
@@ -197,9 +197,9 @@ public switchMap(project: function(value: T, ?index: number): ObservableInput, r
 
 > Maps each value to an Observable, then flattens all of these inner Observables using switch.
 
-## 1.3. Filtering Operator
+## Filtering Operator
 
-### 1.3.1. debounceTime
+### debounceTime
 
 Emits a value from the source Observable only after a particular time span has passed without another source emission.
 
@@ -210,7 +210,7 @@ public debounceTime(dueTime: number, scheduler: Scheduler): Observable
 
 > It's like `delay`, but passes only the most recent value from each burst of emissions.
 
-### 1.3.2. distinctUntilChanged
+### distinctUntilChanged
 
 Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item.
 
